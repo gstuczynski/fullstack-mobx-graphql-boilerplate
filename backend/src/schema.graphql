@@ -22,6 +22,8 @@ type Subscription {
 }
 type Mutation {
   addUser(name: String!, avatar: String!): User
+  #if i set diffrent value - not gql object - wouldnt be imported by mst-gql
+  addMessage(userId: String, text: String): Message
   changeName(id: ID!, name: String!): User
   like(msg: ID!, user: ID!): Message
   postTweet(text: String!, user: ID!, replyTo: ID): Message

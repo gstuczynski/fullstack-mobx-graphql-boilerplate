@@ -58,6 +58,15 @@ export const resolvers: IResolvers = {
       console.log(user);
       user.save();
       return user;
+    },
+    addMessage: async (_: any, { userId, text }: any) => {
+      let m = new Message();
+      m.id = v1();
+      m.timestamp = "00:00:00";
+      m.user = await User.findOne();
+      m.text = text;
+      m.save();
+      return m;
     }
   }
 };

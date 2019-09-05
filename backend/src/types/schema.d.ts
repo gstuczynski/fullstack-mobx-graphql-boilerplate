@@ -58,6 +58,7 @@ declare namespace GQL {
   interface IMutation {
     __typename: 'Mutation';
     addUser: IUser | null;
+    addMessage: IMessage | null;
     changeName: IUser | null;
     like: IMessage | null;
     postTweet: IMessage | null;
@@ -66,6 +67,11 @@ declare namespace GQL {
   interface IAddUserOnMutationArguments {
     name: string;
     avatar: string;
+  }
+
+  interface IAddMessageOnMutationArguments {
+    userId?: string | null;
+    text?: string | null;
   }
 
   interface IChangeNameOnMutationArguments {
