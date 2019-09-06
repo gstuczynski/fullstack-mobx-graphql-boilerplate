@@ -44,7 +44,7 @@ declare namespace GQL {
     timestamp: string | null;
     user: IUser | null;
     text: string | null;
-    likes: Array<IUser | null> | null;
+    likes: IUser | null;
     replyTo: IMessage | null;
   }
 

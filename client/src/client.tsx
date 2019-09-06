@@ -5,6 +5,7 @@ import { SubscriptionClient } from "subscriptions-transport-ws";
 import { createHttpClient } from "mst-gql";
 import { RootStore, StoreContext } from "./models";
 import App from "./App";
+import "./index.css";
 
 const gqlHttpClient = createHttpClient("http://localhost:4000");
 

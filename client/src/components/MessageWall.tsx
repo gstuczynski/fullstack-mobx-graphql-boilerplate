@@ -8,7 +8,11 @@ export const MessageWall = observer(() => {
   const { store, error, loading, setQuery } = useQuery(store =>
     store ? store.loadInitialMessages() : null
   );
-  if (!store || error) return <div>error</div>;
+
+  store;
+  error;
+  debugger;
+  if (!store || error) return <div>errorss</div>;
   if (!store.messages.size) return <div></div>;
   return (
     <>

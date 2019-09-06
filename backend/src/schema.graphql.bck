@@ -8,14 +8,15 @@ type Message {
   timestamp: String
   user: User
   text: String
-  likes: [User]
+  likes: User
   replyTo: Message
 }
 type Query {
-  messages(offset: ID, count: Int, replyTo: ID): [Message]
+  messages: [Message]
   message(id: ID!): Message
   me: User
   dupa: Message
+  users: [User]
 }
 type Subscription {
   newMessages: Message

@@ -17,12 +17,12 @@ export class Message extends BaseEntity {
   @Column("time")
   timestamp: string;
 
-  @ManyToOne(type => User)
-  user: User;
+  @ManyToOne(type => User, user => user.messages)
+  user: Promise<User>;
 
   @Column("varchar", { length: 255 })
   text: string;
 
-  @ManyToOne(type => User)
-  likes: [User];
+  @ManyToMany(type => User)
+  likes: Promise<User[]>;
 }

@@ -1,18 +1,18 @@
 import "reflect-metadata";
-import { GraphQLServer } from "graphql-yoga";
-// ... or using `require()`
-// const { GraphQLServer } = require('graphql-yoga')
-import { importSchema } from "graphql-import";
-import { makeExecutableSchema } from "graphql-tools";
-import { resolvers } from "./resolvers";
+import { ApolloServer } from "apollo-server-express";
+import * as Express from "express";
+import { buildSchema, Resolver, Query } from "type-graphql";
 import { createConnection } from "typeorm";
+import { UserResolver } from "./resolvers/User";
 
-const typeDefs = importSchema("src/schema.graphql");
-
-const schema = makeExecutableSchema({ typeDefs, resolvers });
-
-const server = new GraphQLServer({ typeDefs, resolvers });
-
-createConnection().then(() => {
-  server.start(() => console.log("Server is running on localhost:4000"));
-});
+const main = async () => {
+  await createConnection();
+  const schema = await buildSchema({
+    resolvers: [UserResolver]
+  });
+  const apolloServer = new ApolloServer({ schema });
+  const app = Express();
+  apolloServer.applyMiddleware({ app });
+  app.listen(4001, () => console.log("listening on 4001"));
+};
+main();

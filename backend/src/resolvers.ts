@@ -19,15 +19,7 @@ export const resolvers: IResolvers = {
   //     }
   //   },
   Query: {
-    messages: async (_: any, { offset, count, replyTo }: any) => {
-      let mes = await Message.find();
-      const x = await User.findOne();
-      mes[0].likes = [x];
-      mes[0].user = x;
-      console.log(x, "x");
-      console.log(mes);
-      return mes;
-    },
+    messages: async () => await Message.find(),
     message: async (_: any, {}) => {
       return await Message.findOne();
     },
@@ -38,7 +30,8 @@ export const resolvers: IResolvers = {
       console.log(x);
       return x;
     },
-    me: async (_: any, {}) => await User.findOne()
+    me: async (_: any, {}) => await User.findOne(),
+    users: async () => await User.find()
   },
   Subscription: {
     newMessages: {
@@ -61,10 +54,14 @@ export const resolvers: IResolvers = {
     },
     addMessage: async (_: any, { userId, text }: any) => {
       let m = new Message();
+      const u = await User.findOne();
+      console.log(u, "sss");
       m.id = v1();
       m.timestamp = "00:00:00";
-      m.user = await User.findOne();
+      m.user = u;
       m.text = text;
+      m.likes = u;
+      console.log(m);
       m.save();
       return m;
     }
