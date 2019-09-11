@@ -26,6 +26,7 @@ declare namespace GQL {
     message: IMessage | null;
     me: IUser | null;
     dupa: IMessage | null;
+    users: Array<IUser | null> | null;
   }
 
   interface IMessagesOnQueryArguments {
@@ -53,11 +54,13 @@ declare namespace GQL {
     id: string | null;
     name: string;
     avatar: string | null;
+    messages: Array<IMessage | null> | null;
   }
 
   interface IMutation {
     __typename: 'Mutation';
     addUser: IUser | null;
+    createUser: IUser | null;
     addMessage: IMessage | null;
     changeName: IUser | null;
     like: IMessage | null;
@@ -69,8 +72,12 @@ declare namespace GQL {
     avatar: string;
   }
 
+  interface ICreateUserOnMutationArguments {
+    name: string;
+    avatar: string;
+  }
+
   interface IAddMessageOnMutationArguments {
-    userId?: string | null;
     text?: string | null;
   }
 

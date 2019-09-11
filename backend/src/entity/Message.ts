@@ -1,4 +1,3 @@
-import * as bcrypt from "bcryptjs";
 import {
   Entity,
   Column,
@@ -14,15 +13,15 @@ import { User } from "./User";
 export class Message extends BaseEntity {
   @PrimaryGeneratedColumn("uuid") id: string;
 
-  @Column("time")
+  @Column("time", { default: "00:00:00" })
   timestamp: string;
 
-  @ManyToOne(type => User)
+  @ManyToOne(type => User, user => user.messages)
   user: User;
 
-  @Column("varchar", { length: 255 })
+  @Column("varchar", { length: 255, nullable: true })
   text: string;
 
-  @ManyToOne(type => User)
-  likes: [User];
+  @ManyToMany(type => User, user => user.likes)
+  likes: User[];
 }

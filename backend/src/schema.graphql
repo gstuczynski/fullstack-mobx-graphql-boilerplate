@@ -2,6 +2,7 @@ type User {
   id: ID
   name: String!
   avatar: String
+  messages: [Message]
 }
 type Message {
   id: ID
@@ -12,18 +13,20 @@ type Message {
   replyTo: Message
 }
 type Query {
-  messages(offset: ID, count: Int, replyTo: ID): [Message]
+  messages: [Message]
   message(id: ID!): Message
   me: User
-  dupa: Message
+  dupa: [User]
+  users: [User]
 }
 type Subscription {
   newMessages: Message
 }
 type Mutation {
   addUser(name: String!, avatar: String!): User
+  createUser(name: String!, avatar: String!): User
   #if i set diffrent value - not gql object - wouldnt be imported by mst-gql
-  addMessage(userId: String, text: String): Message
+  addMessage(text: String): Message
   changeName(id: ID!, name: String!): User
   like(msg: ID!, user: ID!): Message
   postTweet(text: String!, user: ID!, replyTo: ID): Message
