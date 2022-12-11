@@ -10,7 +10,7 @@
     "scaffold": "yarn mst-gql --format ts http://localhost:4000 --force"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "graphql-request": "^1.8.2",
     "mobx": "^5.13.0",
     "mobx-react": "^6.1.3",
